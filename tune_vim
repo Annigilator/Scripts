@@ -8,3 +8,4 @@ mkdir .vim/colors .vim/backup .vim/bundle
 wget https://raw.githubusercontent.com/Annigilator/Scripts/master/vim/xoria256-my.vim -O .vim/colors/xoria256-my.vim
 wget https://raw.githubusercontent.com/Annigilator/Scripts/master/vim/vimrc -O .vim/vimrc
 git clone https://github.com/gmarik/Vundle.vim.git .vim/bundle/Vundle.vim
+ln -s $HOME/.vim/vimrc $HOME/.vimrc
