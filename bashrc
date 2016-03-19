@@ -1,6 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# {{{ Common Settings
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -68,9 +66,9 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+# }}}
 
-
-# ================================= ALIASES ===================================
+# {{{ Aliases
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -103,9 +101,9 @@ alias grep-all='find -type f -not -path "*/.*" -not -path "*/build/*" -not -name
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+# }}}
 
-
-# ============================= EXTENSIONS ====================================
+# {{{ Extensions
 
 # Support custom functions
 if [ -f ~/.bash_functions ]; then
@@ -127,5 +125,7 @@ fi
 if [ -f ~/.python_argcomplete ]; then
     . ~/.python_argcomplete
 fi
+# }}}
 
-# ============================== ENVIRONMENT ==================================
+# {{{ Environment
+# }}}
