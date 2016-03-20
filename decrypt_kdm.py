@@ -5,17 +5,19 @@ import struct
 import sys
 
 
-def to_stderr(message, *args, **kws):
-    message = message.format(*args, **kws)
-    print >> sys.stderr, message
+def to_stderr(pattern, *args, **kws):
+    message = pattern.format(*args, **kws)
+    sys.stderr.write(message)
+    sys.stderr.flush()
 
 
-def to_stdout(message, *args, **kws):
-    message.format(*args, **kws)
-    print message.format(*args, **kws)
+def to_stdout(pattern, *args, **kws):
+    message = pattern.format(*args, **kws)
+    sys.stdout.write(message)
+    sys.stdout.flush()
 
 
-class Decrypter(object):
+class Decryptor(object):
     def __init__(self,
                  output_extension='txt',
                  numbers_delimiter='\t',
@@ -59,16 +61,20 @@ class Decrypter(object):
     def decrypt(self, filepath):
         output_path = self.get_output_path(filepath)
         if not self.replace_files and os.path.isfile(output_path):
-            to_stderr('WARNING: file {} elready exists', output_path)
-            to_stdout('Skip decrypting of {}\n', filepath)
+            to_stdout('Skip {} ({} exists)\n', filepath, output_path)
             return
 
-        to_stdout('Decrypting {}...', filepath)
+        to_stdout('Decrypting {}... ', filepath)
 
-        with open(output_path, 'w') as output:
-            output.writelines(self.decrypted_lines(filepath))
+        try:
+            with open(output_path, 'w') as output:
+                output.writelines(self.decrypted_lines(filepath))
+        except Exception, e:
+            to_stdout('FAILED\n')
+            to_stderr('ERROR: {}\n', str(e))
+            return
 
-        to_stdout('Decrypted file: {}\n', output_path)
+        to_stdout('OK (=> {})\n', output_path)
 
 
 def main():
@@ -83,14 +89,14 @@ def main():
     #     output_extension='dcr',
     #     replace_files=True
     # )
-    decrypter = Decrypter()
+    decryptor = Decryptor()
 
     for filepath in filepaths:
         if not os.path.isfile(filepath):
-            to_stderr('WARNING: file {} wasn\'t found\n', filepath)
+            to_stderr('WARNING: file {!r} wasn\'t found\n', filepath)
             continue
 
-        decrypter.decrypt(filepath)
+        decryptor.decrypt(filepath)
 
 
 if __name__ == '__main__':
