@@ -1,4 +1,4 @@
-# {{{ Common Settings
+# <{[ Common Settings
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -42,12 +42,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 
@@ -66,9 +66,9 @@ xterm*|rxvt*)
 *)
     ;;
 esac
-# }}}
+# ]}>
 
-# {{{ Aliases
+# <{[ Aliases
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -101,9 +101,9 @@ alias grep-all='find -type f -not -path "*/.*" -not -path "*/build/*" -not -name
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-# }}}
+# ]}>
 
-# {{{ Extensions
+# <{[ Extensions
 
 # Support custom functions
 if [ -f ~/.bash_functions ]; then
@@ -125,7 +125,7 @@ fi
 if [ -f ~/.python_argcomplete ]; then
     . ~/.python_argcomplete
 fi
-# }}}
+# ]}>
 
-# {{{ Environment
-# }}}
+# <{[ Environment
+# ]}>

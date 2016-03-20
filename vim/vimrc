@@ -1,4 +1,4 @@
-" {{{ Bundle Settings
+" <{[ Bundle Settings
 
 set nocompatible  " Use Vim defaults instead of 100% vi compatibility
 filetype off
@@ -28,9 +28,9 @@ Plugin 'tpope/vim-fugitive'
 
 call vundle#end()
 filetype plugin indent on " required by Vundle
-" }}}
+" ]}>
 
-" {{{ Plugins Settings
+" <{[ Plugins Settings
 
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
@@ -73,9 +73,9 @@ let g:airline_symbols.linenr = '␤ '
 let g:airline_symbols.branch = '⎇ '
 let g:airline_symbols.readonly = 'RO'
 let g:airline_symbols.whitespace = '☢ '
-" }}}
+" ]}>
 
-" {{{ Global Settings
+" <{[ Global Settings
 
 syntax on
 set t_Co=256 " Force 256 colors
@@ -92,13 +92,15 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,
 
 set ruler                 " Show the cursor position all the time
 set number                " Show line numbers
-set fdm=marker            " Folding based on markers
-set foldtext=MyFoldText() " Text for closed folding
 set laststatus=2          " Always show the statusline
 set colorcolumn=80        " Color 80 characters in line
 hi ColorColumn ctermbg=5
 "set textwidth=80         " 80 characters in line
 "set cursorline           " Highlight current line
+
+set foldmethod=marker     " Folding based on markers
+set foldmarker=<{[,]}>    " Folding marker
+set foldtext=MyFoldText() " Text for closed folding
 
 set listchars=tab:▸·,trail:·,extends:$,eol:↲
 
@@ -132,9 +134,9 @@ if has("persistent_undo")
     set undofile                " Persistent undo
     set undodir=~/.vim/undo
 endif
-" }}}
+" ]}>
 
-" {{{ KeyMap Settings
+" <{[ KeyMap Settings
 
 map <F2> :YcmComplete GoToDefinition<CR>
 map <F3> :YcmComplete GoToDeclaration<CR>
@@ -152,14 +154,14 @@ noremap <Leader>n :set number<CR>
 noremap <Leader>nn :set nonumber<CR>
 noremap <Leader>l :set list<CR>
 noremap <Leader>nl :set nolist<CR>
-" }}}
+" ]}>
 
-" {{{ Functions
+" <{[ Functions
 
 function! MyFoldText()
-    let line = substitute(getline(v:foldstart), '[^{]*{{' . '{\s*', '', 'g')
+    let line = substitute(getline(v:foldstart), '[^[{<]*<{' . '[\s*', '', 'g')
     let n = v:foldend - v:foldstart + 1
     let foldtext = ">> " . line . " (" . n . " lines)"
     return foldtext . repeat(" ", winwidth(0) - len(foldtext))
 endfunction
-"}}}
+" ]}>
