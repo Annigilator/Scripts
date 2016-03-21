@@ -40,6 +40,7 @@ let colors_name = "xoria256-my"
 hi Normal       ctermfg=252 guifg=#d0d0d0 ctermbg=none guibg=#1c1c1c cterm=none gui=none
 hi Cursor                                 ctermbg=214 guibg=#ffaf00
 hi CursorColumn                           ctermbg=238 guibg=#444444
+hi ColorColumn                            ctermbg=234
 hi CursorLine                             ctermbg=237 guibg=#3a3a3a cterm=none gui=none
 hi Error        ctermfg=15  guifg=#ffffff ctermbg=1   guibg=#800000
 hi ErrorMsg     ctermfg=15  guifg=#ffffff ctermbg=1   guibg=#800000

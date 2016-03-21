@@ -63,7 +63,7 @@ let g:UltiSnipsExpandTrigger = '<TAB>'
 let g:UltiSnipsJumpForwardTrigger = '<TAB>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
 
-let g:airline_theme = 'lucius'
+let g:airline_theme = 'simple'
 let g:airline_left_sep = '▶'
 let g:airline_left_alt_sep = '❯'
 let g:airline_right_sep = '◀'
@@ -79,7 +79,7 @@ let g:airline_symbols.whitespace = '☢ '
 
 syntax on
 set t_Co=256 " Force 256 colors
-colorscheme xoria256-my
+colorscheme molokai-my
 
 set encoding=utf-8
 set fileencodings=utf-8,cp1251,koi8-r
@@ -94,7 +94,7 @@ set ruler                 " Show the cursor position all the time
 set number                " Show line numbers
 set laststatus=2          " Always show the statusline
 set colorcolumn=80        " Color 80 characters in line
-hi ColorColumn ctermbg=5
+hi ColorColumn ctermbg=234
 "set textwidth=80         " 80 characters in line
 "set cursorline           " Highlight current line
 

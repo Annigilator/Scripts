@@ -82,25 +82,28 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# git aliases
-alias squash-commit="git commit -m Some && git rebase -i HEAD~2"
-alias gib="git branch"
-alias gis="git status"
-alias glu="git log -u"
-alias gl="git log --name-status"
+# 'ls' shortcuts
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
-# some more aliases
+# sudo shortcuts
 alias svim='sudo vim'
 alias srm='sudo rm'
 alias apt-update='sudo apt-get update'
 
+# git aliases
+alias gib="git branch"
+alias gis="git status"
+alias gl="git log --name-status"
+alias glu="git log -u"
+alias squash-commit="git commit -m Some && git rebase -i HEAD~2"
+
+# global aliases
+alias tmux='tmux -2'
 alias proc='ps kstart_time -o user,pid,ppid,priority,tname,stat,stime,time,cmd'
 alias grep-py='find -type f -name "*.py" -not -path "*/.*" -not -path */build/* -print0 | xargs -0 egrep --color -iH'
 alias grep-all='find -type f -not -path "*/.*" -not -path "*/build/*" -not -name ".*" -not -name "*.pyc" -not -name "*.so" -not -name "*.o" -not -name "*.egg" -print0 | xargs -0 egrep --color -iH'
-
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 # ]}>
 
 # <{[ Extensions

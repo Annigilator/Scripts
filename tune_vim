@@ -1,11 +1,23 @@
 #!/bin/sh
 
-set -eux
+set -ex
 
-cd $HOME
-mkdir .vim
-mkdir .vim/colors .vim/backup .vim/bundle .vim/undo
-wget -nv https://raw.githubusercontent.com/Annigilator/Scripts/master/vim/xoria256-my.vim -O .vim/colors/xoria256-my.vim
-wget -nv https://raw.githubusercontent.com/Annigilator/Scripts/master/vim/vimrc -O .vim/vimrc
-git clone -q https://github.com/gmarik/Vundle.vim.git .vim/bundle/Vundle.vim
-ln -fs $HOME/.vim/vimrc $HOME/.vimrc
+[ -z "$HOME" ] && echo 'Undefined $HOME' && exit 1
+
+VIM_HOME=$HOME/.vim
+REPO_ROOT=https://raw.githubusercontent.com/Annigilator/Scripts/master
+
+mkdir $VIM_HOME
+
+for dir in colors backup bundle undo; do
+    mkdir $VIM_HOME/$dir
+done
+
+for theme in 'xoria256-my.vim' 'molokai-my.vim'; do
+    wget -nv $REPO_ROOT/vim/colors/$theme -O $VIM_HOME/colors/$theme
+done
+
+git clone -q https://github.com/gmarik/Vundle.vim.git $VIM_HOME/bundle/Vundle.vim
+
+wget -nv $REPO_ROOT/vim/vimrc -O $VIM_HOME/vimrc
+ln -fs $VIM_HOME/vimrc $HOME/.vimrc
