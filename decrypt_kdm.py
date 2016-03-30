@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 
+import multiprocessing
 import os
 import struct
 import sys
+
+
+PARALLEL_PROCESSES_LIMIT = 10
 
 
 def to_stderr(pattern, *args, **kws):
@@ -59,45 +63,55 @@ class Decryptor(object):
         return os.path.join(directory, new_name)
 
     def decrypt(self, filepath):
+        if not os.path.isfile(filepath):
+            to_stderr('WARNING: file {!r} wasn\'t found\n', filepath)
+            return
+
         output_path = self.get_output_path(filepath)
         if not self.replace_files and os.path.isfile(output_path):
             to_stdout('Skip {} ({} exists)\n', filepath, output_path)
             return
 
-        to_stdout('Decrypting {}... ', filepath)
+        to_stdout('Decrypting {}...\n', filepath)
 
         try:
             with open(output_path, 'w') as output:
                 output.writelines(self.decrypted_lines(filepath))
-        except Exception, e:
-            to_stdout('FAILED\n')
-            to_stderr('ERROR: {}\n', str(e))
+        except (Exception, KeyboardInterrupt), e:
+            if os.path.isfile(output_path):
+                os.remove(output_path)
+
+            if isinstance(e, KeyboardInterrupt):
+                to_stderr('\r{} KeyboardInterrupt\n', filepath)
+            else:
+                to_stderr('{} ERROR: {}\n', filepath, str(e))
+
             return
 
-        to_stdout('OK (=> {})\n', output_path)
+        to_stdout('{} finished (=> {})\n', filepath, output_path)
 
 
-def main():
+if __name__ == '__main__':
     filepaths = frozenset(sys.argv[1:])
 
     if not filepaths:
         raise SystemExit('Nothing to decrypt')
 
-    # Set input arguments to change decrypter behaviour; for example:
-    # decrypter = Decrypter(
+    # Set input arguments to change decryptor behaviour; for example:
+    # decryptor = Decryptor(
     #     numbers_delimiter=' ',
     #     output_extension='dcr',
     #     replace_files=True
     # )
     decryptor = Decryptor()
 
-    for filepath in filepaths:
-        if not os.path.isfile(filepath):
-            to_stderr('WARNING: file {!r} wasn\'t found\n', filepath)
-            continue
-
+    def process(filepath):
         decryptor.decrypt(filepath)
 
-
-if __name__ == '__main__':
-    main()
+    processes = min(PARALLEL_PROCESSES_LIMIT, len(filepaths))
+    try:
+        multiprocessing.Pool(processes).map(process, filepaths)
+    except KeyboardInterrupt:
+        pass
+    except Exception, e:
+        to_stderr('ERROR: {}', str(e))
