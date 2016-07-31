@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -ex
+set -e
 
 [ -z "$HOME" ] && echo 'Undefined $HOME' && exit 1
 
@@ -17,6 +17,7 @@ for theme in 'xoria256-my.vim' 'molokai-my.vim'; do
     wget -nv $REPO_ROOT/vim/colors/$theme -O $VIM_HOME/colors/$theme
 done
 
+echo 'Cloning Vundle.vim repo...'
 git clone -q https://github.com/gmarik/Vundle.vim.git $VIM_HOME/bundle/Vundle.vim
 
 wget -nv $REPO_ROOT/vim/vimrc -O $VIM_HOME/vimrc
