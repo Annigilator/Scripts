@@ -1,0 +1,10 @@
+[user]
+    name = Mikhail Koksharov
+[core]
+    editor = vim
+[color]
+    ui = true
+[alias]
+    changes = !git log $(git describe --tags --abbrev=0)..HEAD --no-merges --oneline
+    delbranch = !sh -c 'git branch -D $1 && git push origin :$1' -
+    fullclean = clean -xdf
