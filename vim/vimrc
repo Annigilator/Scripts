@@ -15,8 +15,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 " Fast fs tree navigation
 Plugin 'scrooloose/nerdtree'
-" Used for python and pyrex syntax highlighting
-Plugin 'klen/python-mode'
 " Lean & mean status line
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -30,7 +28,7 @@ call vundle#end()
 filetype plugin indent on " required by Vundle
 " ]}>
 
-" <{[ Plugins Settings
+" <{[ Plugins settings
 
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_key_list_select_completion = ['<Down>']
@@ -76,7 +74,7 @@ let g:airline_symbols.readonly = 'RO'
 let g:airline_symbols.whitespace = '☢ '
 " ]}>
 
-" <{[ Global Settings
+" <{[ Global settings
 
 syntax on
 set t_Co=256 " Force 256 colors
@@ -137,7 +135,7 @@ if has("persistent_undo")
 endif
 " ]}>
 
-" <{[ KeyMap Settings
+" <{[ KeyMap settings
 
 map <F2> :YcmComplete GoToDefinition<CR>
 map <F3> :YcmComplete GoToDeclaration<CR>
