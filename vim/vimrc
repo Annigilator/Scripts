@@ -1,4 +1,4 @@
-" <{[ Bundle Settings
+" <{[ Plugins declaration
 
 set nocompatible  " Use Vim defaults instead of 100% vi compatibility
 filetype off
@@ -15,7 +15,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 " Fast fs tree navigation
 Plugin 'scrooloose/nerdtree'
-" Features for python
+" Used for python and pyrex syntax highlighting
 Plugin 'klen/python-mode'
 " Lean & mean status line
 Plugin 'bling/vim-airline'
@@ -32,6 +32,7 @@ filetype plugin indent on " required by Vundle
 
 " <{[ Plugins Settings
 
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_goto_buffer_command = 'vertical-split'
@@ -42,22 +43,22 @@ let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_min_num_identifier_candidate_chars = 2
 let g:ycm_use_ultisnips_completer = 0
 
-let g:syntastic_auto_jump = 1
+let g:syntastic_mode_map = {'mode': 'active'}
+let g:syntastic_error_symbol = "E"
+let g:syntastic_warning_symbol = "W"
+let g:syntastic_auto_jump = 0
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_loc_list_height = 5
+let g:syntastic_cpp_compiler = 'g++-4.9'
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
 let g:syntastic_python_checkers = ['pylint', 'pep8']
-let g:syntastic_mode_map = {
-            \'mode': 'active',
-            \'passive_filetypes': ['python']}
+let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: [{msg_id}] {msg}"'
 
 let g:pymode_folding = 0          " It annoys
 let g:pymode_rope = 0             " YouCompleteMe better for it
-let g:pymode_lint_unmodified = 1  " Check unmodified saves
-let g:pymode_lint_checkers = ['pylint', 'pep8']
-let g:pymode_lint_sort = ['E', 'W', 'C', 'I']
-let g:pymode_lint_ignore = 'E501,E731,W0142,W0212,W0401,W0614,W0703,C0111,C0301,R0201,R09'
+let g:pymode_lint = 0             " Syntastic better for it
 
 let g:UltiSnipsExpandTrigger = '<TAB>'
 let g:UltiSnipsJumpForwardTrigger = '<TAB>'
