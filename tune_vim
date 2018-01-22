@@ -9,11 +9,9 @@ REPO_ROOT=https://raw.githubusercontent.com/Annigilator/Scripts/master
 
 mkdir $VIM_HOME
 
-for dir in colors backup bundle undo syntax; do
+for dir in colors backup bundle undo; do
     mkdir $VIM_HOME/$dir
 done
-
-wget -nv $REPO_ROOT/vim/syntax/python.vim -O $VIM_HOME/syntax/python.vim
 
 for theme in 'xoria256-my.vim' 'molokai-my.vim'; do
     wget -nv $REPO_ROOT/vim/colors/$theme -O $VIM_HOME/colors/$theme
