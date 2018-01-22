@@ -9,6 +9,8 @@ call vundle#begin()
 " Let Vundle manage itself
 Plugin 'gmarik/Vundle.vim'
 
+" Python syntax and indents
+Plugin 'python-mode/python-mode'
 " Code autocomplete
 Plugin 'Valloric/YouCompleteMe'
 " Code errors checking
@@ -30,6 +32,15 @@ filetype plugin indent on " required by Vundle
 
 " <{[ Plugins settings
 
+let g:pymode_syntax = 1
+let g:pymode_indent = 1
+let g:pymode_motion = 1
+let g:pymode_folding = 0
+let g:pymode_rope = 0
+let g:pymode_lint = 0
+let g:pymode_run = 0
+let g:pymode_virtualenv = 0
+
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
@@ -42,18 +53,20 @@ let g:ycm_min_num_identifier_candidate_chars = 2
 let g:ycm_use_ultisnips_completer = 0
 
 let g:syntastic_mode_map = {'mode': 'active'}
+let g:syntastic_check_on_wq = 1
 let g:syntastic_aggregate_errors = 1
-let g:syntastic_auto_jump = 0
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 1
 let g:syntastic_loc_list_height = 5
-let g:syntastic_error_symbol = "E"
-let g:syntastic_warning_symbol = "W"
+let g:syntastic_error_symbol = 'E'
+let g:syntastic_style_error_symbol = 'SE'
+let g:syntastic_warning_symbol = 'W'
+let g:syntastic_style_warning_symbol = 'SW'
 let g:syntastic_cpp_compiler = 'g++-4.9'
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
-let g:syntastic_python_checkers = ['pylint', 'pep8']
-let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: [{msg_id}] {msg}"'
+let g:syntastic_python_checkers = ['pylint', 'pycodestyle']
+let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: {msg_id} {msg}" --disable=W0108,C0330'
+let g:syntastic_python_pycodestyle_post_args = '--ignore=E501'
 
 let g:UltiSnipsExpandTrigger = '<TAB>'
 let g:UltiSnipsJumpForwardTrigger = '<TAB>'
