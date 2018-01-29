@@ -11,6 +11,8 @@ Plugin 'gmarik/Vundle.vim'
 
 " Python syntax and indents
 Plugin 'python-mode/python-mode'
+" Tags bar
+Plugin 'majutsushi/tagbar'
 " Code autocomplete
 Plugin 'Valloric/YouCompleteMe'
 " Code errors checking
@@ -31,6 +33,17 @@ filetype plugin indent on " required by Vundle
 " ]}>
 
 " <{[ Plugins settings
+
+let g:tagbar_width = 35
+let g:tagbar_indent = 1
+let g:tagbar_left = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_sort = 0
+let g:tagbar_foldlevel = 0
+let g:tagbar_map_openfold = '<Right>'
+let g:tagbar_map_closefold = '<Left>'
+" open tagbar automatically if filetype is supported
+autocmd VimEnter * nested :call tagbar#autoopen(1)
 
 let g:pymode_syntax = 1
 let g:pymode_indent = 1
@@ -105,7 +118,7 @@ set laststatus=2          " Always show the statusline
 set colorcolumn=80        " Color 80 characters in line
 hi ColorColumn ctermbg=234
 "set textwidth=80         " 80 characters in line
-"set cursorline           " Highlight current line
+set cursorline           " Highlight current line
 
 set foldmethod=marker     " Folding based on markers
 set foldmarker=<{[,]}>    " Folding marker
@@ -147,12 +160,15 @@ endif
 
 " <{[ KeyMap settings
 
-map <F2> :YcmComplete GoToDefinition<CR>
-map <F3> :YcmComplete GoToDeclaration<CR>
+nmap <F2> :YcmComplete GoToDeclaration<CR>
+nmap <F3> :YcmComplete GoToDefinition<CR>
+nmap <F4> :YcmCompleter GoToReferences<CR>
 
-map <F5> :SyntasticCheck<CR>
-map <F6> :SyntasticInfo<CR>
-map <F7> :SyntasticReset<CR>
+nmap <F5> :SyntasticCheck<CR>
+nmap <F6> :SyntasticInfo<CR>
+nmap <F7> :SyntasticReset<CR>
+
+nmap <F8> :TagbarToggle<CR>
 
 nmap > :lnext<CR>
 nmap < :lprev<CR>
