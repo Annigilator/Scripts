@@ -43,8 +43,6 @@ let g:tagbar_sort = 0
 let g:tagbar_foldlevel = 0
 let g:tagbar_map_openfold = '<Right>'
 let g:tagbar_map_closefold = '<Left>'
-" open tagbar automatically if filetype is supported
-autocmd VimEnter * nested :call tagbar#autoopen(1)
 
 let g:pymode_syntax = 1
 let g:pymode_indent = 1
