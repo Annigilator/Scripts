@@ -56,6 +56,7 @@ let g:pymode_virtualenv = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_key_list_stop_completion = ['<Right>']
 let g:ycm_goto_buffer_command = 'vertical-split'
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -74,10 +75,14 @@ let g:syntastic_error_symbol = 'E'
 let g:syntastic_style_error_symbol = 'SE'
 let g:syntastic_warning_symbol = 'W'
 let g:syntastic_style_warning_symbol = 'SW'
-let g:syntastic_cpp_compiler = 'g++-4.9'
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
+let g:syntastic_c_checkers = ['gcc']
+let g:syntastic_c_compiler = 'clang'
+let g:syntastic_c_compiler_options = ' -Wall -Wextra'
+let g:syntastic_cpp_checkers = ['gcc']
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall -Wextra'
 let g:syntastic_python_checkers = ['pylint', 'pycodestyle']
-let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: {msg_id} {msg}" --disable=W0108,C0330'
+let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: {msg_id} {msg}" --disable=W0108,C0111,C0330'
 let g:syntastic_python_pycodestyle_post_args = '--ignore=E501'
 
 let g:UltiSnipsExpandTrigger = '<TAB>'
@@ -156,13 +161,15 @@ if has("persistent_undo")
     set undofile                " Persistent undo
     set undodir=~/.vim/undo
 endif
+
+autocmd BufWritePre *.c,*.cpp,*.h,*.hpp %s/\s\+$//e
 " ]}>
 
 " <{[ KeyMap settings
 
-nmap <F2> :YcmComplete GoToDeclaration<CR>
-nmap <F3> :YcmComplete GoToDefinition<CR>
-nmap <F4> :YcmCompleter GoToReferences<CR>
+nmap <F1> :YcmCompleter GetType<CR>
+nmap <F2> :YcmCompleter GoToDefinition<CR>
+nmap <F3> :YcmCompleter GoToDeclaration<CR>
 
 nmap <F5> :SyntasticCheck<CR>
 nmap <F6> :SyntasticInfo<CR>
