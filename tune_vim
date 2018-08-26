@@ -10,11 +10,11 @@ VIM_HOME=$HOME/.vim
 
 mkdir $VIM_HOME
 
-for dir in colors backup bundle undo syntax; do
-    mkdir $VIM_HOME/$dir
+for dir in colors backup bundle undo after/syntax; do
+    mkdir -p $VIM_HOME/$dir
 done
 
-for suffix in 'colors/xoria256-my.vim' 'colors/molokai-my.vim' 'syntax/cpp.vim' 'syntax/c.vim'; do
+for suffix in 'colors/xoria256-my.vim' 'colors/molokai-my.vim' 'after/syntax/cpp.vim' 'after/syntax/c.vim'; do
     wget -nv $REPO_VIM/$suffix -O $VIM_HOME/$suffix
 done
 

@@ -34,6 +34,8 @@ filetype plugin indent on " required by Vundle
 
 " <{[ Plugins settings
 
+" <{[ Tagbar Settings
+let g:tagbar_ctags_bin = '/home/sinister/tools/bin/ctags'
 let g:tagbar_width = 35
 let g:tagbar_compact = 1
 let g:tagbar_indent = 2
@@ -43,7 +45,9 @@ let g:tagbar_sort = 0
 let g:tagbar_foldlevel = 0
 let g:tagbar_map_openfold = '<Right>'
 let g:tagbar_map_closefold = '<Left>'
+" ]}>
 
+" <{[ Pymode settings
 let g:pymode_syntax = 1
 let g:pymode_indent = 1
 let g:pymode_motion = 1
@@ -52,7 +56,9 @@ let g:pymode_rope = 0
 let g:pymode_lint = 0
 let g:pymode_run = 0
 let g:pymode_virtualenv = 0
+" ]}>
 
+" <{[ YCM settings
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
@@ -64,7 +70,9 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_min_num_identifier_candidate_chars = 2
 let g:ycm_use_ultisnips_completer = 0
+" ]}>
 
+" <{[ Syntastic settings
 let g:syntastic_mode_map = {'mode': 'active'}
 let g:syntastic_check_on_wq = 1
 let g:syntastic_aggregate_errors = 1
@@ -78,17 +86,21 @@ let g:syntastic_style_warning_symbol = 'SW'
 let g:syntastic_c_checkers = ['gcc']
 let g:syntastic_c_compiler = 'clang'
 let g:syntastic_c_compiler_options = ' -Wall -Wextra'
-let g:syntastic_cpp_checkers = ['gcc']
+let g:syntastic_cpp_checkers = ['clang_check']
 let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall -Wextra'
+let g:syntastic_cpp_compiler_options = ' -std=c++14 -Wall -Wextra'
 let g:syntastic_python_checkers = ['pylint', 'pycodestyle']
 let g:syntastic_python_pylint_post_args = '--msg-template="{path}:{line}:{column}:{C}: {msg_id} {msg}" --disable=W0108,C0111,C0330'
 let g:syntastic_python_pycodestyle_post_args = '--ignore=E501'
+" ]}>
 
+" <{[ UltiSnips settings
 let g:UltiSnipsExpandTrigger = '<TAB>'
 let g:UltiSnipsJumpForwardTrigger = '<TAB>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
+" ]}>
 
+" <{[ Airline settings
 let g:airline_theme = 'simple'
 let g:airline_left_sep = '▶'
 let g:airline_left_alt_sep = '❯'
@@ -99,6 +111,7 @@ let g:airline_symbols.linenr = '␤ '
 let g:airline_symbols.branch = '⎇ '
 let g:airline_symbols.readonly = 'RO'
 let g:airline_symbols.whitespace = '☢ '
+" ]}>
 
 " ]}>
 
@@ -117,13 +130,14 @@ set history=50        " keep 50 lines of command line history
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,
             \.ind,.idx,.ilg,.inx,.out,.toc
 
-set ruler                 " Show the cursor position all the time
-set number                " Show line numbers
-set laststatus=2          " Always show the statusline
-set colorcolumn=80        " Color 80 characters in line
+set ruler                   " Show the cursor position all the time
+set number                  " Show line numbers
+set nolist                  " Disable special symbols
+set laststatus=2            " Always show the statusline
+set colorcolumn=80,120      " Color 80 characters in line
 hi ColorColumn ctermbg=234
-"set textwidth=80         " 80 characters in line
-"set cursorline           " Highlight current line
+"set cursorline             " Highlight current line
+"set textwidth=80           " 80 characters in line
 
 set foldmethod=marker     " Folding based on markers
 set foldmarker=<{[,]}>    " Folding marker
@@ -168,14 +182,16 @@ autocmd BufWritePre *.c,*.cpp,*.h,*.hpp %s/\s\+$//e
 " <{[ KeyMap settings
 
 nmap <F1> :YcmCompleter GetType<CR>
-nmap <F2> :YcmCompleter GoToDefinition<CR>
-nmap <F3> :YcmCompleter GoToDeclaration<CR>
+nmap <F2> :YcmCompleter GoToDeclaration<CR>
+nmap <F3> :YcmCompleter GoToDefinition<CR>
+nmap <f4> :YcmCompleter GoTo<CR>
 
 nmap <F5> :SyntasticCheck<CR>
 nmap <F6> :SyntasticInfo<CR>
 nmap <F7> :SyntasticReset<CR>
 
 nmap <F8> :TagbarToggle<CR>
+nmap <F9> :NERDTree<CR>
 
 nmap > :lnext<CR>
 nmap < :lprev<CR>
