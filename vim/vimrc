@@ -56,6 +56,7 @@ let g:pymode_rope = 0
 let g:pymode_lint = 0
 let g:pymode_run = 0
 let g:pymode_virtualenv = 0
+let g:pymode_options_colorcolumn = 0
 " ]}>
 
 " <{[ YCM settings
@@ -64,7 +65,9 @@ let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_key_list_stop_completion = ['<Right>']
 let g:ycm_goto_buffer_command = 'vertical-split'
-let g:ycm_show_diagnostics_ui = 0
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_open_loclist_on_ycm_diags = 0
+let g:ycm_max_diagnostics_to_display = 30
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_min_num_of_chars_for_completion = 3
@@ -73,7 +76,7 @@ let g:ycm_use_ultisnips_completer = 0
 " ]}>
 
 " <{[ Syntastic settings
-let g:syntastic_mode_map = {'mode': 'active'}
+let g:syntastic_mode_map = {'mode': 'active', 'passive_filetypes': ['cpp', 'c']}
 let g:syntastic_check_on_wq = 1
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_always_populate_loc_list = 1
@@ -83,7 +86,7 @@ let g:syntastic_error_symbol = 'E'
 let g:syntastic_style_error_symbol = 'SE'
 let g:syntastic_warning_symbol = 'W'
 let g:syntastic_style_warning_symbol = 'SW'
-let g:syntastic_c_checkers = ['gcc']
+let g:syntastic_c_checkers = ['clang_check']
 let g:syntastic_c_compiler = 'clang'
 let g:syntastic_c_compiler_options = ' -Wall -Wextra'
 let g:syntastic_cpp_checkers = ['clang_check']
@@ -134,7 +137,7 @@ set ruler                   " Show the cursor position all the time
 set number                  " Show line numbers
 set nolist                  " Disable special symbols
 set laststatus=2            " Always show the statusline
-set colorcolumn=80,120      " Color 80 characters in line
+set colorcolumn=80,100,120  " Color 80, 100, 120 characters in line
 hi ColorColumn ctermbg=234
 "set cursorline             " Highlight current line
 "set textwidth=80           " 80 characters in line
@@ -163,6 +166,7 @@ set softtabstop=4
 set smarttab
 set expandtab
 set smartindent
+set cinoptions=g0,(4  " settings for smart indentation in *.c, *.cpp files
 
 set hlsearch    " Highlight search
 set nowrapscan  " Don't wrap around EOF or BOF while searching
@@ -182,9 +186,9 @@ autocmd BufWritePre *.c,*.cpp,*.h,*.hpp %s/\s\+$//e
 " <{[ KeyMap settings
 
 nmap <F1> :YcmCompleter GetType<CR>
-nmap <F2> :YcmCompleter GoToDeclaration<CR>
-nmap <F3> :YcmCompleter GoToDefinition<CR>
-nmap <f4> :YcmCompleter GoTo<CR>
+nmap <F2> :YcmCompleter GoTo<CR>
+nmap <F3> :YcmCompleter GoToDeclaration<CR>
+nmap <F4> :YcmCompleter GoToDefinition<CR>
 
 nmap <F5> :SyntasticCheck<CR>
 nmap <F6> :SyntasticInfo<CR>
@@ -198,6 +202,7 @@ nmap < :lprev<CR>
 
 noremap <Leader>pc :pclose<CR>
 noremap <Leader>lc :lclose<CR>
+noremap <Leader>lo :lopen 5<CR>
 noremap <Leader>n :set number<CR>
 noremap <Leader>nn :set nonumber<CR>
 noremap <Leader>l :set list<CR>
